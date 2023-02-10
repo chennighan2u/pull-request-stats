@@ -49,6 +49,7 @@ const run = async (params) => {
     startDate: subtractDaysToDate(new Date(), periodLength),
   });
   core.info(`Found ${pulls.length} pull requests to analyze`);
+  core.info(`PRs: ${JSON.stringify(pulls, null, 2)}`);
 
   const reviewersRaw = getReviewers(pulls);
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
