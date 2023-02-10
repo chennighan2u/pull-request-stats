@@ -8,6 +8,7 @@ const {
   buildTable,
   postComment,
   getReviewers,
+  getTotalPrsByUser,
   buildComment,
   setUpReviewers,
   checkSponsorship,
@@ -49,11 +50,15 @@ const run = async (params) => {
     startDate: subtractDaysToDate(new Date(), periodLength),
   });
   core.info(`Found ${pulls.length} pull requests to analyze`);
-  core.info(`PRs: ${JSON.stringify(pulls, null, 2)}`);
+  // core.info(`PRs: ${JSON.stringify(pulls, null, 2)}`);
 
   const reviewersRaw = getReviewers(pulls);
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
-  core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
+  // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
+
+  const totalPrsByUser = pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id));
+
+  core.info(`prs by author: ${JSON.stringify(totalPrsByUser, null, 2)}`);
 
   const reviewers = setUpReviewers({
     limit,
