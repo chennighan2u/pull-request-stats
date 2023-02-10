@@ -73,7 +73,7 @@ const run = async (params) => {
     return result;
   }
 
-  core.info(`prs by author: ${JSON.stringify(totalPrsByUser, null, 2)}`);
+  core.info(`prs by author: ${JSON.stringify(totalPrsByUser(), null, 2)}`);
 
   const reviewers = setUpReviewers({
     limit,
