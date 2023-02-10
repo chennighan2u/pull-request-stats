@@ -56,8 +56,22 @@ const run = async (params) => {
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
   // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
 
-  /* eslint-disable */
-  const totalPrsByUser = [...new Set(pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id).author))];
+  /* eslint-disable */  
+  const totalPrsByUser = () => {
+    const result = [];
+    const map = new Map();
+    for(const pull of pulls) {
+      if(!map.has(pull.author)) {
+        map.set(pull.author, true);
+        result.push({
+          author: pull.author,
+          count: getTotalPrsByUser(pulls, pull.author.id).count
+        });
+      }
+    }
+
+    return result;
+  }
 
   core.info(`prs by author: ${JSON.stringify(totalPrsByUser, null, 2)}`);
 
