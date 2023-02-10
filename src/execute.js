@@ -57,7 +57,7 @@ const run = async (params) => {
   // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
 
   /* eslint-disable */
-  const totalPrsByUser = [...new Set(pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id)))];
+  const totalPrsByUser = [...new Set(pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id).author))];
 
   core.info(`prs by author: ${JSON.stringify(totalPrsByUser, null, 2)}`);
 
