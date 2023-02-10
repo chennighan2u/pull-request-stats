@@ -18669,7 +18669,13 @@ module.exports = function isCancel(value) {
 /* 733 */,
 /* 734 */,
 /* 735 */,
-/* 736 */,
+/* 736 */
+/***/ (function(module) {
+
+module.exports = (pulls, author) => pulls.filter((pull) => pull.author.id === author);
+
+
+/***/ }),
 /* 737 */,
 /* 738 */,
 /* 739 */,
@@ -24478,6 +24484,7 @@ const buildComment = __webpack_require__(641);
 const checkSponsorship = __webpack_require__(402);
 const getPulls = __webpack_require__(591);
 const getReviewers = __webpack_require__(164);
+const getTotalPrsByUser = __webpack_require__(736);
 const postComment = __webpack_require__(173);
 const setUpReviewers = __webpack_require__(901);
 const postSlackMessage = __webpack_require__(878);
@@ -24492,6 +24499,7 @@ module.exports = {
   checkSponsorship,
   getPulls,
   getReviewers,
+  getTotalPrsByUser,
   postComment,
   setUpReviewers,
   postSlackMessage,

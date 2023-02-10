@@ -4,6 +4,7 @@ const buildComment = require('./buildComment');
 const checkSponsorship = require('./checkSponsorship');
 const getPulls = require('./getPulls');
 const getReviewers = require('./getReviewers');
+const getTotalPrsByUser = require('./getTotalPrsByUser');
 const postComment = require('./postComment');
 const setUpReviewers = require('./setUpReviewers');
 const postSlackMessage = require('./postSlackMessage');
@@ -18,6 +19,7 @@ module.exports = {
   checkSponsorship,
   getPulls,
   getReviewers,
+  getTotalPrsByUser,
   postComment,
   setUpReviewers,
   postSlackMessage,
