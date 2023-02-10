@@ -16688,6 +16688,7 @@ const run = async (params) => {
 
   const reviewersRaw = getReviewers(pulls);
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
+  core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
 
   const reviewers = setUpReviewers({
     limit,
