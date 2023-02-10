@@ -16691,7 +16691,7 @@ const run = async (params) => {
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
   // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
 
-  const totalPrsByUser = pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id).length);
+  const totalPrsByUser = pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id));
 
   core.info(`prs by author: ${JSON.stringify(totalPrsByUser, null, 2)}`);
 
@@ -18672,7 +18672,10 @@ module.exports = function isCancel(value) {
 /* 736 */
 /***/ (function(module) {
 
-module.exports = (pulls, author) => pulls.filter((pull) => pull.author.id === author);
+module.exports = (pulls, author) => {
+  const count = pulls.filter((pull) => pull.author.id === author).length;
+  return { author, count };
+};
 
 
 /***/ }),

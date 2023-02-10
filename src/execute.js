@@ -56,7 +56,7 @@ const run = async (params) => {
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
   // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
 
-  const totalPrsByUser = pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id).length);
+  const totalPrsByUser = pulls.map((pull) => getTotalPrsByUser(pulls, pull.author.id));
 
   core.info(`prs by author: ${JSON.stringify(totalPrsByUser, null, 2)}`);
 

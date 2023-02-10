@@ -1,1 +1,4 @@
-module.exports = (pulls, author) => pulls.filter((pull) => pull.author.id === author);
+module.exports = (pulls, author) => {
+  const count = pulls.filter((pull) => pull.author.id === author).length;
+  return { author, count };
+};
