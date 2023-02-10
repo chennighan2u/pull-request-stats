@@ -16700,7 +16700,7 @@ const run = async (params) => {
         map.set(pull.author, true);
         result.push({
           author: pull.author,
-          count: getTotalPrsByUser(pulls, pull.author.id).count
+          count: getTotalPrsByUser(pulls, pull.author.id)
         });
       }
     }
