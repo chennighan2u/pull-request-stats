@@ -88,7 +88,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
-      totalPrs: `${totalPrsByAuthor.count}`,
+      totalPrs: `${totalPrsByAuthor}`,
     };
   };
 
@@ -106,7 +106,7 @@ module.exports = ({
       timeToReview: t('table.columns.timeToReview'),
       totalReviews: t('table.columns.totalReviews'),
       totalComments: t('table.columns.totalComments'),
-      totalPrs: t('table.columns.totalPrsByAuthor'),
+      totalPrs: t('table.columns.totalPrs'),
     };
 
     return [
