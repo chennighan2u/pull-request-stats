@@ -5,7 +5,7 @@ const toTableArray = require('./toTableArray');
 
 module.exports = ({
   reviewers,
-  totalPrsByUser,
+  totalPRsByUser,
   disableLinks,
   displayCharts,
   pulls,
@@ -17,7 +17,7 @@ module.exports = ({
     const tableData = getTableData({
       bests,
       reviewers,
-      totalPrsByUser,
+      totalPRsByUser,
       disableLinks,
       displayCharts,
       pulls,

@@ -1,6 +1,6 @@
 const { t } = require('../../i18n');
 const { durationToString, isNil } = require('../../utils');
-const getTotalPrsByUser = require('../getTotalPrsByUser');
+const getTotalPRsByUser = require('../getTotalPRsByUser');
 
 const NA = '-';
 
@@ -74,7 +74,7 @@ module.exports = ({
     } = reviewer;
     const { login } = author || {};
     const chartsData = getChartsData({ index, contributions, displayCharts });
-    const totalPrs = getTotalPrsByUser(pulls, reviewer.author.id);
+    const totalPRs = getTotalPRsByUser(pulls, reviewer.author.id);
 
     const avatar = getImage({ author, displayCharts });
     const timeVal = printStat(stats, 'timeToReview', durationToString);
@@ -88,7 +88,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
-      totalPrs: `${totalPrs}`,
+      totalPRs: `${totalPRs}`,
     };
   };
 
@@ -106,7 +106,7 @@ module.exports = ({
       timeToReview: t('table.columns.timeToReview'),
       totalReviews: t('table.columns.totalReviews'),
       totalComments: t('table.columns.totalComments'),
-      totalPrs: t('table.columns.totalPrs'),
+      totalPRs: t('table.columns.totalPRs'),
     };
 
     return [

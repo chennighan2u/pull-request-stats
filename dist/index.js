@@ -2787,7 +2787,7 @@ const toTableArray = __webpack_require__(65);
 
 module.exports = ({
   reviewers,
-  totalPrsByUser,
+  totalPRsByUser,
   disableLinks,
   displayCharts,
   pulls,
@@ -2799,7 +2799,7 @@ module.exports = ({
     const tableData = getTableData({
       bests,
       reviewers,
-      totalPrsByUser,
+      totalPRsByUser,
       disableLinks,
       displayCharts,
       pulls,
@@ -15879,7 +15879,7 @@ module.exports = [["8740","䏰䰲䘃䖦䕸𧉧䵷䖳𧲱䳢𧳅㮕䜶䝄䱇䱀�
 
 const { t } = __webpack_require__(781);
 const { durationToString, isNil } = __webpack_require__(353);
-const getTotalPrsByUser = __webpack_require__(736);
+const getTotalPRsByUser = __webpack_require__(624);
 
 const NA = '-';
 
@@ -15953,7 +15953,7 @@ module.exports = ({
     } = reviewer;
     const { login } = author || {};
     const chartsData = getChartsData({ index, contributions, displayCharts });
-    const totalPrs = getTotalPrsByUser(pulls, reviewer.author.id);
+    const totalPRs = getTotalPRsByUser(pulls, reviewer.author.id);
 
     const avatar = getImage({ author, displayCharts });
     const timeVal = printStat(stats, 'timeToReview', durationToString);
@@ -15967,7 +15967,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
-      totalPrs: `${totalPrs}`,
+      totalPRs: `${totalPRs}`,
     };
   };
 
@@ -15985,7 +15985,7 @@ module.exports = ({
       timeToReview: t('table.columns.timeToReview'),
       totalReviews: t('table.columns.totalReviews'),
       totalComments: t('table.columns.totalComments'),
-      totalPrs: t('table.columns.totalPrs'),
+      totalPRs: t('table.columns.totalPRs'),
     };
 
     return [
@@ -16433,7 +16433,16 @@ module.exports = require("path");
 
 /***/ }),
 /* 623 */,
-/* 624 */,
+/* 624 */
+/***/ (function(module) {
+
+module.exports = (pulls, authorId) => {
+  const count = pulls.filter((pull) => pull.author.id === authorId).length;
+  return count;
+};
+
+
+/***/ }),
 /* 625 */,
 /* 626 */,
 /* 627 */,
@@ -16492,14 +16501,14 @@ const SORT_KEY = {
   PRS: 'totalPRs',
 };
 
-const COLUMNS_ORDER = ['totalReviews', 'timeToReview', 'totalComments', 'totalPrs'];
+const COLUMNS_ORDER = ['totalReviews', 'timeToReview', 'totalComments', 'totalPRs'];
 
 const STATS_OPTIMIZATION = {
   totalReviews: 'MAX',
   totalComments: 'MAX',
   commentsPerReview: 'MAX',
   timeToReview: 'MIN',
-  totalPrs: 'MAX',
+  totalPRs: 'MAX',
 };
 
 const STATS = Object.keys(STATS_OPTIMIZATION);
@@ -18677,16 +18686,7 @@ module.exports = function isCancel(value) {
 /* 733 */,
 /* 734 */,
 /* 735 */,
-/* 736 */
-/***/ (function(module) {
-
-module.exports = (pulls, authorId) => {
-  const count = pulls.filter((pull) => pull.author.id === authorId).length;
-  return count;
-};
-
-
-/***/ }),
+/* 736 */,
 /* 737 */,
 /* 738 */,
 /* 739 */,
@@ -24495,7 +24495,7 @@ const buildComment = __webpack_require__(641);
 const checkSponsorship = __webpack_require__(402);
 const getPulls = __webpack_require__(591);
 const getReviewers = __webpack_require__(164);
-const getTotalPrsByUser = __webpack_require__(736);
+const getTotalPRsByUser = __webpack_require__(624);
 const postComment = __webpack_require__(173);
 const setUpReviewers = __webpack_require__(901);
 const postSlackMessage = __webpack_require__(878);
@@ -24510,7 +24510,7 @@ module.exports = {
   checkSponsorship,
   getPulls,
   getReviewers,
-  getTotalPrsByUser,
+  getTotalPRsByUser,
   postComment,
   setUpReviewers,
   postSlackMessage,
