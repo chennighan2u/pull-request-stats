@@ -60,7 +60,7 @@ const run = async (params) => {
   const totalPrsByUser = () => {
     const result = [];
     const map = new Map();
-    for(const pull of pulls['PRs']) {
+    for(const pull of pulls) {
       if(!map.has(pull.author.id)) {
         map.set(pull.author.id, true);
         result.push({
