@@ -8,6 +8,7 @@ module.exports = ({
   totalPrsByUser,
   disableLinks,
   displayCharts,
+  pulls,
 }) => {
   const execute = () => {
     const allStats = reviewers.map((r) => r.stats);
@@ -19,6 +20,7 @@ module.exports = ({
       totalPrsByUser,
       disableLinks,
       displayCharts,
+      pulls,
     });
 
     return table(toTableArray(tableData));

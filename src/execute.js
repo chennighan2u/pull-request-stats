@@ -8,7 +8,6 @@ const {
   buildTable,
   postComment,
   getReviewers,
-  getTotalPrsByUser,
   buildComment,
   setUpReviewers,
   checkSponsorship,
@@ -54,26 +53,6 @@ const run = async (params) => {
 
   const reviewersRaw = getReviewers(pulls);
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
-  // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
-
-  /* eslint-disable */  
-  const totalPrsByUser = () => {
-    const result = [];
-    const map = new Map();
-    for(const pull of pulls) {
-      if(!map.has(pull.author.id)) {
-        map.set(pull.author.id, true);
-        result.push({
-          author: pull.author.id,
-          count: getTotalPrsByUser(pulls, pull.author.id)
-        });
-      }
-    }
-
-    return result;
-  } // this doesn't belong here, it belongs in getTableData.js where the row is built
-
-  core.info(`prs by author: ${JSON.stringify(totalPrsByUser(), null, 2)}`);
 
   const reviewers = setUpReviewers({
     limit,
@@ -82,7 +61,10 @@ const run = async (params) => {
     reviewers: reviewersRaw,
   });
 
-  const table = buildTable({ reviewers, totalPrsByUser, disableLinks, displayCharts });
+  const table = buildTable({
+    reviewers, disableLinks, displayCharts, pulls,
+  });
+
   core.debug('Stats table built successfully');
 
   const content = buildComment({

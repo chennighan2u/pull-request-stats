@@ -2790,6 +2790,7 @@ module.exports = ({
   totalPrsByUser,
   disableLinks,
   displayCharts,
+  pulls,
 }) => {
   const execute = () => {
     const allStats = reviewers.map((r) => r.stats);
@@ -2801,6 +2802,7 @@ module.exports = ({
       totalPrsByUser,
       disableLinks,
       displayCharts,
+      pulls,
     });
 
     return table(toTableArray(tableData));
@@ -15877,6 +15879,7 @@ module.exports = [["8740","䏰䰲䘃䖦䕸𧉧䵷䖳𧲱䳢𧳅㮕䜶䝄䱇䱀�
 
 const { t } = __webpack_require__(781);
 const { durationToString, isNil } = __webpack_require__(353);
+const getTotalPrsByUser = __webpack_require__(736);
 
 const NA = '-';
 
@@ -15933,6 +15936,7 @@ module.exports = ({
   bests = {},
   disableLinks = false,
   displayCharts = false,
+  pulls,
 }) => {
   const printStat = (stats, statName, parser) => {
     const value = stats[statName];
@@ -15949,6 +15953,7 @@ module.exports = ({
     } = reviewer;
     const { login } = author || {};
     const chartsData = getChartsData({ index, contributions, displayCharts });
+    const totalPrsByAuthor = getTotalPrsByUser(pulls, reviewer.author.id);
 
     const avatar = getImage({ author, displayCharts });
     const timeVal = printStat(stats, 'timeToReview', durationToString);
@@ -15962,6 +15967,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
+      totalPrs: `${totalPrsByAuthor.count}`,
     };
   };
 
@@ -15979,6 +15985,7 @@ module.exports = ({
       timeToReview: t('table.columns.timeToReview'),
       totalReviews: t('table.columns.totalReviews'),
       totalComments: t('table.columns.totalComments'),
+      totalPrs: t('table.columns.totalPrsByAuthor'),
     };
 
     return [
@@ -16645,7 +16652,6 @@ const {
   buildTable,
   postComment,
   getReviewers,
-  getTotalPrsByUser,
   buildComment,
   setUpReviewers,
   checkSponsorship,
@@ -16691,26 +16697,6 @@ const run = async (params) => {
 
   const reviewersRaw = getReviewers(pulls);
   core.info(`Analyzed stats for ${reviewersRaw.length} pull request reviewers`);
-  // core.info(`Reviewers: ${JSON.stringify(reviewersRaw, null, 2)}`);
-
-  /* eslint-disable */  
-  const totalPrsByUser = () => {
-    const result = [];
-    const map = new Map();
-    for(const pull of pulls) {
-      if(!map.has(pull.author.id)) {
-        map.set(pull.author.id, true);
-        result.push({
-          author: pull.author.id,
-          count: getTotalPrsByUser(pulls, pull.author.id)
-        });
-      }
-    }
-
-    return result;
-  } // this doesn't belong here, it belongs in getTableData.js where the row is built
-
-  core.info(`prs by author: ${JSON.stringify(totalPrsByUser(), null, 2)}`);
 
   const reviewers = setUpReviewers({
     limit,
@@ -16719,7 +16705,10 @@ const run = async (params) => {
     reviewers: reviewersRaw,
   });
 
-  const table = buildTable({ reviewers, totalPrsByUser, disableLinks, displayCharts });
+  const table = buildTable({
+    reviewers, disableLinks, displayCharts, pulls,
+  });
+
   core.debug('Stats table built successfully');
 
   const content = buildComment({
@@ -18689,8 +18678,8 @@ module.exports = function isCancel(value) {
 /* 736 */
 /***/ (function(module) {
 
-module.exports = (pulls, author) => {
-  const count = pulls.filter((pull) => pull.author.id === author).length;
+module.exports = (pulls, authorId) => {
+  const count = pulls.filter((pull) => pull.author.id === authorId).length;
   return count;
 };
 

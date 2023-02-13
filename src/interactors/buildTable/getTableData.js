@@ -1,5 +1,6 @@
 const { t } = require('../../i18n');
 const { durationToString, isNil } = require('../../utils');
+const getTotalPrsByUser = require('../getTotalPrsByUser');
 
 const NA = '-';
 
@@ -56,6 +57,7 @@ module.exports = ({
   bests = {},
   disableLinks = false,
   displayCharts = false,
+  pulls,
 }) => {
   const printStat = (stats, statName, parser) => {
     const value = stats[statName];
@@ -72,6 +74,7 @@ module.exports = ({
     } = reviewer;
     const { login } = author || {};
     const chartsData = getChartsData({ index, contributions, displayCharts });
+    const totalPrsByAuthor = getTotalPrsByUser(pulls, reviewer.author.id);
 
     const avatar = getImage({ author, displayCharts });
     const timeVal = printStat(stats, 'timeToReview', durationToString);
@@ -85,6 +88,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
+      totalPrs: `${totalPrsByAuthor.count}`,
     };
   };
 
@@ -102,6 +106,7 @@ module.exports = ({
       timeToReview: t('table.columns.timeToReview'),
       totalReviews: t('table.columns.totalReviews'),
       totalComments: t('table.columns.totalComments'),
+      totalPrs: t('table.columns.totalPrsByAuthor'),
     };
 
     return [
