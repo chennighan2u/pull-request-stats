@@ -17580,7 +17580,7 @@ run();
 /* 680 */
 /***/ (function(module) {
 
-module.exports = {"title":"Pull reviewers stats","icon":"https://s3.amazonaws.com/manuelmhtr.assets/flowwer/logo/logo-1024px.png","subtitle":{"one":"Stats of the last day for {{sources}}","other":"Stats of the last {{count}} days for {{sources}}"},"sources":{"separator":", ","fullList":"{{firsts}} and {{last}}","andOthers":"{{firsts}} and {{count}} others"},"columns":{"avatar":"","username":"User","timeToReview":"Time to review","totalReviews":"Total reviews","totalComments":"Total comments"}};
+module.exports = {"title":"Pull reviewers stats","icon":"https://s3.amazonaws.com/manuelmhtr.assets/flowwer/logo/logo-1024px.png","subtitle":{"one":"Stats of the last day for {{sources}}","other":"Stats of the last {{count}} days for {{sources}}"},"sources":{"separator":", ","fullList":"{{firsts}} and {{last}}","andOthers":"{{firsts}} and {{count}} others"},"columns":{"avatar":"","username":"User","timeToReview":"Time to review","totalReviews":"Total reviews","totalComments":"Total comments","totalPRs":"Total PRs"}};
 
 /***/ }),
 /* 681 */

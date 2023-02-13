@@ -15,6 +15,7 @@
     "username": "User",
     "timeToReview": "Time to review",
     "totalReviews": "Total reviews",
-    "totalComments": "Total comments"
+    "totalComments": "Total comments",
+    "totalPRs": "Total PRs"
   }
 }
