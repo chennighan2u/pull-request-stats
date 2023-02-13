@@ -71,7 +71,7 @@ const run = async (params) => {
     }
 
     return result;
-  }
+  } // this doesn't belong here, it belongs in getTableData.js where the row is built
 
   core.info(`prs by author: ${JSON.stringify(totalPrsByUser(), null, 2)}`);
 
