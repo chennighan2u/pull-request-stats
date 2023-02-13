@@ -74,7 +74,7 @@ module.exports = ({
     } = reviewer;
     const { login } = author || {};
     const chartsData = getChartsData({ index, contributions, displayCharts });
-    const totalPrsByAuthor = getTotalPrsByUser(pulls, reviewer.author.id);
+    const totalPrs = getTotalPrsByUser(pulls, reviewer.author.id);
 
     const avatar = getImage({ author, displayCharts });
     const timeVal = printStat(stats, 'timeToReview', durationToString);
@@ -88,7 +88,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
-      totalPrs: `total prs: ${totalPrsByAuthor}`,
+      totalPrs: `${totalPrs}`,
     };
   };
 
