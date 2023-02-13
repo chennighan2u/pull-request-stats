@@ -88,7 +88,7 @@ module.exports = ({
       timeToReview: `${timeStr}${chartsData.timeStr}`,
       totalReviews: `${reviewsStr}${chartsData.reviewsStr}`,
       totalComments: `${commentsStr}${chartsData.commentsStr}`,
-      totalPrs: `${totalPrsByAuthor}`,
+      totalPrs: `total prs: ${totalPrsByAuthor}`,
     };
   };
 
