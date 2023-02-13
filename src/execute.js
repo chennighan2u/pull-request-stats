@@ -82,7 +82,7 @@ const run = async (params) => {
     reviewers: reviewersRaw,
   });
 
-  const table = buildTable({ reviewers, disableLinks, displayCharts });
+  const table = buildTable({ reviewers, totalPrsByUser, disableLinks, displayCharts });
   core.debug('Stats table built successfully');
 
   const content = buildComment({

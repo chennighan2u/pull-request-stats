@@ -2787,6 +2787,7 @@ const toTableArray = __webpack_require__(65);
 
 module.exports = ({
   reviewers,
+  totalPrsByUser,
   disableLinks,
   displayCharts,
 }) => {
@@ -2797,6 +2798,7 @@ module.exports = ({
     const tableData = getTableData({
       bests,
       reviewers,
+      totalPrsByUser,
       disableLinks,
       displayCharts,
     });
@@ -16717,7 +16719,7 @@ const run = async (params) => {
     reviewers: reviewersRaw,
   });
 
-  const table = buildTable({ reviewers, disableLinks, displayCharts });
+  const table = buildTable({ reviewers, totalPrsByUser, disableLinks, displayCharts });
   core.debug('Stats table built successfully');
 
   const content = buildComment({
